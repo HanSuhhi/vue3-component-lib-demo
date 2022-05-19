@@ -1,0 +1,36 @@
+/* stylelint-disable at-rule-no-unknown */
+@define-mixin center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@define-mixin size $width, $height {
+  width: $width;
+  height: $height;
+}
+
+@define-mixin button-text $color: var(--blue) {
+  color: $color;
+}
+
+@define-mixin absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@define-mixin pseudo {
+  content: "";
+  @mixin absolute;
+}
+
+@define-mixin full {
+  @mixin size 100%, 100%;
+}
+
+@define-mixin button-disabled {
+  cursor: not-allowed !important;
+}

@@ -1,0 +1,6 @@
+:root {
+  --mini: rem(2px);
+  --small: rem(4px);
+  --normal: rem(8px);
+  --large: rem(16px);
+}

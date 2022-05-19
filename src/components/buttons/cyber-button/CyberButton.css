@@ -1,0 +1,256 @@
+/* stylelint-disable at-rule-no-unknown */
+
+@import "@/styles/base/reset.css";
+@import "@/styles/base/method.css";
+
+.at-cyber-button {
+  /* default */
+  --color: var(--white);
+  --border-color: var(--blue);
+  --bg: var(--red);
+  --glitch-text: "";
+  --glitch-color: var(--white);
+  --top: rem(16px);
+  --left: rem(80px);
+  --border: rem(4px);
+  --clip:
+    polygon(
+      0 var(--normal),
+      rem(42px) var(--normal),
+      rem(50px) 0,
+      /* calc(78% - var(--normal)) 0,
+      78% var(--normal), */ 100% 0,
+      100% var(--normal),
+      100% calc(100% - rem(10px)),
+      calc(100% - rem(10px)) calc(100% - rem(10px)),
+      calc(85% - rem(10px)) calc(100% - rem(10px)),
+      calc(85% - rem(10px)) 100%,
+      rem(50px) 100%,
+      0 100% /* 0 calc(97% - rem(10px)) */
+    );
+  --active: 20%;
+
+  @mixin reset-button;
+  @mixin center;
+  @mixin button-text var(--color);
+
+  position: relative;
+  clip-path: var(--clip);
+  padding: var(--top) var(--left);
+  letter-spacing: rem(1px);
+  font-weight: bold;
+  font-size: var(--f-normal);
+}
+
+.at-cyber-button::before {
+  @mixin pseudo;
+  @mixin center;
+
+  clip-path: var(--clip);
+  z-index: -1;
+  background-color: var(--bg);
+  right: var(--border);
+}
+
+.at-cyber-button::after {
+  @mixin pseudo;
+  @mixin center;
+
+  clip-path: var(--clip);
+  z-index: -2;
+  background-color: var(--border-color);
+}
+
+.at-cyber-button:active {
+  filter: grayscale(var(--active));
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.at-cyber-button__glitch {
+  --slice-0: polygon(0 2%, 100% 2%, 100% 95%, 0% 95%);
+  --slice-1: polygon(0 75%, 100% 75%, 100% 100%, 0 100%);
+  --slice-2: polygon(0 40%, 100% 40%, 95% 50%, 0 50%);
+  --slice-3: polygon(0 0, 100% 0, 100% 18%, 85% 22%, 0, 22%);
+  --slice-4: polygon(0 0, 85% 0, 100% 18%, 100% 100%, 0 100%);
+  --slice-5: polygon(0 40%, 100% 40%, 100% 75%, 85% 85%, 0 85%);
+  --slice-6: polygon(0 60%, 100% 60%, 100% 80%, 85% 85%, 0 85%);
+  --slice-7: polygon(0 30%, 100% 30%, 100% 55%, 30% 55%, 0 45%);
+
+  @mixin center;
+  @mixin absolute;
+
+  opacity: 0;
+}
+
+.at-cyber-button__glitch::before {
+  @mixin pseudo;
+  @mixin center;
+
+  z-index: 0;
+  content: var(--glitch-text);
+  color: var(--glitch-color);
+  background-color: var(--bg);
+  clip-path: var(--clip);
+  right: calc(var(--border) * 0.8);
+  left: calc(var(--border) * 0.4);
+}
+
+.at-cyber-button__glitch::after {
+  @mixin pseudo;
+  @mixin center;
+
+  z-index: -1;
+  clip-path: var(--clip);
+  background-color: var(--border-color);
+}
+
+.at-cyber-button:hover .at-cyber-button__glitch {
+  animation: Glitch 2s infinite;
+  opacity: 1;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------------------------------------------- */
+
+.at-cyber-button__tag {
+  position: absolute;
+  bottom: rem(10px);
+  right: var(--large);
+  padding: var(--mini) var(--normal);
+  padding-left: var(--large);
+  font-size: var(--f-mini);
+  line-height: var(--f-mini);
+  color: var(--yellow);
+  background-color: var(--black);
+  border-left: 2px solid var(--gray);
+}
+
+.at-cyber-button:hover .at-cyber-button__tag {
+  animation: Glitch-Tag 2s infinite;
+}
+
+.at-cyber-button-disabled {
+  @mixin button-disabled;
+
+  filter: grayscale(var(--active));
+}
+
+.at-cyber-button-disabled:hover {
+  filter: grayscale(calc(var(--active)));
+}
+
+/* ANIMATION */
+@keyframes Glitch {
+  0% {
+    clip-path: var(--slice-0);
+    transform: translateY(var(--small));
+  }
+
+  4% {
+    clip-path: var(--slice-1);
+    transform: translateY(var(--small)) translateX(var(--small));
+  }
+
+  8% {
+    clip-path: var(--slice-1);
+    transform: translateY(var(--small));
+  }
+
+  12% {
+    clip-path: var(--slice-2);
+    transform: translateY(var(--small)) translateX(var(--small));
+  }
+
+  18% {
+    clip-path: var(--slice-3);
+    transform: translateY(var(--small));
+  }
+
+  25% {
+    clip-path: var(--slice-4);
+    transform: translateY(var(--small)) translateX(calc(var(--mini) * -1));
+  }
+
+  27% {
+    clip-path: var(--slice-4);
+    transform: translateY(var(--small)) translateX(var(--mini));
+  }
+
+  31% {
+    clip-path: var(--slice-5);
+    transform: translateY(var(--small));
+  }
+
+  35% {
+    clip-path: var(--slice-5);
+    transform: translateY(var(--small)) translateX(var(--small));
+  }
+
+  40% {
+    clip-path: var(--slice-5);
+    transform: translateY(var(--small)) translateX(var(--normal));
+  }
+
+  45% {
+    clip-path: var(--slice-5);
+    transform: translateY(var(--small));
+  }
+
+  50% {
+    clip-path: var(--slice-7);
+  }
+
+  55% {
+    clip-path: var(--slice-6);
+    transform: translateY(var(--small)) translateX(var(--mini));
+  }
+
+  60% {
+    clip-path: var(--slice-6);
+  }
+
+  65% {
+    clip-path: var(--slice-7);
+    transform: translateY(var(--small)) translateX(calc(var(--small) * -1));
+  }
+
+  70% {
+    clip-path: var(--slice-3);
+    transform: translateY(var(--small)) translateX(calc(var(--mini) * -1));
+  }
+
+  100% {
+    clip-path: var(--slice-2);
+  }
+}
+
+@keyframes Glitch-Tag {
+  4%,
+  12%,
+  35% {
+    transform: translateX(var(--small)) translateY(var(--mini));
+    opacity: 0.95;
+  }
+
+  25%,
+  70% {
+    transform: translateX(calc(var(--mini) * -1)) translateY(calc(var(--mini) * -1));
+    opacity: 0.8;
+  }
+
+  27%,
+  55% {
+    transform: translateX(var(--mini)) translateY(var(--mini));
+    opacity: 0.85;
+  }
+
+  40% {
+    transform: translateX(var(--normal)) translateY(var(--mini));
+    opacity: 0.75;
+  }
+
+  65% {
+    transform: translateX(calc(var(--small) * -1)) translateY(calc(var(--mini) * -1));
+    opacity: 0.9;
+  }
+}
